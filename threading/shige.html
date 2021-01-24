@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <script type="text/javascript" src="https://ip.ws.126.net/ipquery"></script>
+    <script src="/newpage/js/all.js"></script>
+    <meta charset="UTF-8">
+    <title>《出塞》_王昌龄的诗词_诗词名句网</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/public/css/www_v3.css">
+    <link rel="stylesheet" href="/public/css/font_576092_m2icqcebp7evzpvi.css">
+    <script src="/public/js/device.js"></script>
+    <script src="/public/js/jq.js"></script>
+    <script src="/public/js/www_v3.js"></script>
+</head>
+<body>
+<div id="top_bar">
+    <div id="top_bar_main">
+        <div id="top_left">
+            <a href="/"><img src="/public/image/logo.png" id="logo"/></a>
+            <div id="top_left_menu">
+                <ul>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/shicimark">分类</a></li>
+                    <li><a href="/category/all">作者</a></li>
+                    <li><a href="/paiming">排行榜</a></li>
+                    <li><a href="/cate?cate_id=4">课本古诗</a></li>
+                    <li><a href="/cipai/index.html">词牌名</a></li>
+                    <li><a href="/cangtoushi/index.html">藏头诗</a></li>
+                    <li><a href="/hecheng/index.html">合称</a></li>
+                    <li><a href="/book/">古籍</a></li>
+                </ul>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div id="top_right">
+            <div id="top_right_nav">
+                <ul>
+                    <li><a href="javascript:void(0)" data-cate="all">综合</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="zuozhe">作者</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="title">标题</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="shiju">诗句</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="first">句首</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="end">句尾</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="book">古籍</a> </li>
+                    <li><a href="javascript:void(0)" data-cate="chengyu">成语</a> </li>
+                </ul>
+            </div>
+            <div id="input_div">
+                <input type="text" name="kw" id="search_input" placeholder="" autocomplete="off" value="">
+                <a href="javascript:doSearch();"><img src="/public/image/web_search.png" class="www-icon"></a>
+                <div style="clear: both"></div>
+            </div>
+            <div id="tip_result" class="card">
+                <ul>
+                </ul>
+                <div id="tip_content">
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+
+<div id="nav-top"><a href="/">主页</a><span class="nav-arrow"></span><a href="/category/all">作者大全</a><span class="nav-arrow"></span><a href="/chaxun/zuozhe/56.html">王昌龄</a></div>
+
+<div id="main">
+    <div id="main_left">
+        <div id="item_div" class="card" style="position: relative">
+            <div style="display: none" id="zs_zhushi">【1】但使：只要。<br/>【3】不教：不叫，不让。教，让。<br/>【4】胡马：异族军队。<br/>【5】度：越过。<br/>【6】阴山：昆仑山的北支，起自河套西北，横贯绥远、察哈尔及热河北部，是中国北方的屏障。<br/>【7】还：回来</div>
+            <script>
+                function getZhushiOb(content,reg,zhushiMap) {
+                    if(!content){
+                        var aa = [];
+                        aa.push({word:'\n',type:'nm'});
+                        return aa;
+                    }
+                    var re = new RegExp(reg, 'g');
+                    var nc = content.replace(re, '@$1@');
+                    var ncArr = nc.split(/[@]+/g);
+                    var arr = [];
+                    for(var i =0;i<ncArr.length;i++){
+                        var word = ncArr[i];
+                        var val = zhushiMap[word];
+                        var o = {};
+                        o.word = word;
+                        if(val){
+                            o.type = 'zs';
+                        }else{
+                            o.type = 'nm';
+                        }
+                        arr.push(o);
+                    }
+                    return arr;
+                }
+                /*删除html ，并转换<br> <p>为换行 */
+                function convertHtmlTag(str) {
+                    str = str.replace(new RegExp('\n+', 'g'),'');
+                    str = str.replace(new RegExp('<br[ /]*>', 'g'), '\n');
+                    str = str.replace(new RegExp('<p[ /]*>', 'g'), '\n\n');
+                    return str.replace(new RegExp('<[^>]+>', 'g'), "");
+                }
+                var reg = '';
+                function getZhushiMap(){
+                    var zhushi = $("#zs_zhushi").html();
+                    zhushi = convertHtmlTag(zhushi);
+                    var arr = zhushi.split('\n');
+                    var o ={};
+
+                    var juReg = /["“”](.+)["“”]句/g;
+                    for(var i=0;i<arr.length;i++){
+                        var na = arr[i].split(/[:：]/);
+                        if(na.length>=2){
+                            var k = na[0].replace(/【[0-9]+】/,'');
+                            var v = '';
+                            for(var j=1;j<na.length;j++){
+                                v+=na[j];
+                                if(j!==na.length-1)v+="：";
+                            }
+                            var oo = {
+                                key:k,
+                                val:v
+                            };
+                            var kk = k.replace(/[(（].+?[）)]/g,'');
+                            if(juReg.test(kk)){
+                                kk = kk.replace(juReg,"$1");
+                            }
+                            o[kk] = oo;
+                            reg+=kk+"|";
+                        }
+                    }
+                    reg = '('+reg.substr(0,reg.length-1)+')';
+                    return o;
+                }
+                var zhushiMap = getZhushiMap();
+                function getZhuzhiContent(content) {
+                    var ctArr = content.split('\n');
+                    var contentList = [];
+                    for(var hh=0;hh<ctArr.length;hh++){
+                        var shiju = ctArr[hh];
+                        var a = getZhushiOb(shiju,reg,zhushiMap);
+                        contentList.push(a);
+                    }
+                    var html = '';
+                    for (var c = 0; c < contentList.length; c++) {
+                        var shijus = contentList[c];
+                        html+='<div>';
+                        for (var d = 0; d < shijus.length; d++) {
+                            var word = shijus[d];
+                            if(word.type === 'zs'){
+                                html+='<span style="border-bottom: 1px solid #999;margin: 0 1px;" class="zhushi_word">'+word.word+'</span>';
+                            }else{
+                                var w = word.word;
+                                if(w==='\n'){
+                                    w = "<br />";
+                                }
+                                html+='<span>'+w+'</span>';
+                            }
+                        }
+                        html+='</div>';
+                    }
+                    return html;
+                }
+            </script>
+                        <img src="/pics/item/2973.jpg">
+                        <h1 id="zs_title">出塞</h1>
+            <div class="niandai_zuozhe"> [唐] <a href="/chaxun/zuozhe/56.html">王昌龄</a></div>
+                        <div class="item_content" id="zs_content">
+                秦时明月汉时关，万里长征人未还。<br>但使龙城飞将在，不教胡马度阴山。            </div>
+            <div id='zhushi_main' style='display: none;max-width:600px;left:0;top:0;text-align:left;z-index:100000;color:white;position: absolute;'>
+                <div style="width:0;height:0;overflow:hidden;border-width:8px;border-color: transparent transparent #000000 transparent;border-style:solid dashed dashed dashed;margin-left: 10px;"></div>
+                <div id="zhushi_key" style="font-weight: bold;background: #000000;padding: 5px 5px 0 5px; border-radius:2px 2px 0 0; "></div>
+                <div id="zhushi_val" style='font-weight: normal;background: #000000;padding: 5px 5px 5px 5px; border-radius: 0 0 2px 2px;'></div>
+            </div>
+            <script>
+                if(reg){
+                    var zs_title = $("#zs_title").html();
+                    zs_title = convertHtmlTag(zs_title);
+                    zs_title = zs_title.trim();
+                    $("#zs_title").html(getZhuzhiContent(zs_title));
+                    var zs_content = $("#zs_content").html();
+                    zs_content = convertHtmlTag(zs_content);
+                    zs_content = zs_content.trim();
+                    $("#zs_content").html(getZhuzhiContent(zs_content));
+                    var zs =$("#zs_xu");
+                    if(zs.length>0){
+                        var zs_xu = zs.html();
+                        if(zs_xu){
+                            zs_xu = convertHtmlTag(zs_xu);
+                            zs_xu = zs_xu.trim();
+                            $("#zs_xu").html(getZhuzhiContent(zs_xu));
+                        }
+                    }
+
+                }
+                var zhushiShowTime = 0;
+                $("body").on('click',function () {
+                    $("#zhushi_main").hide();
+                });
+                $("#zhushi_main").on('click',function () {
+                   return false;
+                });
+                $(".zhushi_word").on('click',function (e) {
+                    var zs = $(this).html();
+                    var ob = zhushiMap[zs];
+                    if(ob){
+                        $("#zhushi_main").show();
+                        $("#zhushi_key").html(ob.key+"：");
+                        $("#zhushi_val").html(ob.val);
+                        var pos = $(this).position();
+                        $("#zhushi_main").css({"left":(pos.left-10)+"px","top":(pos.top+$(this).height()-8)+"px"});
+                        zhushiShowTime++;
+                    }
+                    e.preventDefault();
+                    return false;
+                });
+
+            </script>
+                        <div class="shici-mark">
+                分类标签:
+                                <a href="/shicimark/biansaishi.html" target="_blank">边塞诗</a>
+                                <a href="/shicimark/aiguoshi.html" target="_blank">爱国诗</a>
+                                <a href="/shicimark/zhanzhengshi.html" target="_blank">战争诗</a>
+                                <a href="/shicimark/tangshisanbaishou.html" target="_blank">唐诗三百首</a>
+                                <a href="/shicimark/youguoyoumin.html" target="_blank">忧国忧民</a>
+                            </div>
+                    </div>
+        
+                <div id="item_shangxi" class="card">
+            <div class="item_title">
+                作品赏析
+            </div>
+            <div class="shangxi_content">
+                这是一首慨叹边战不断，国无良将的边塞诗。诗的首句最耐人寻味。说的是此地<br/>汉关，明月秦时，大有历史变换，征战未断的感叹。二句写征人未还，多少儿男战死<br/>沙场，留下多少悲剧。三、四句写出千百年来人民的共同意愿，冀望有“龙城飞将”<br/>出现，平息胡乱，安定边防。全诗以平凡的语言，唱出雄浑豁达的主旨，气势流畅，<br/>一气呵成，吟之莫不叫绝。明人<a href="/chaxun/zuozhe/659.html" target="_blank">李攀龙</a>曾推奖它是唐代七绝压卷之作，实不过分。<br/><br/>--引自"超纯斋诗词"bookbest.163.net 翻译、评析：刘建勋<br/><br/>这是一首名作，明代诗人李攀龙曾经推奖它唐人七绝的压卷之作。清<a href="/chaxun/zuozhe/718.html" target="_blank">沈德潜</a>《说诗ㄧ语》说：“‘秦时明月’一章，前人推奖之而未言其妙，盖言师劳力竭，而功不成，由将非其人之故；得飞将军备边，边烽自熄，即高常侍《燕歌行》归重‘至今人说李将军’也。防边筑城，起于秦汉，明月属秦，关属汉，诗中互文。”他这段话批评李攀龙只知推奖此诗而未言其妙，可是他自己也只是说明了全诗的主旨，并没有点出作者的匠心。<br/><br/>    沈氏归纳的全诗的主旨基本是对的，但这个主旨的思想是很平凡的。为什么这样平凡的思想竟能写成为一首压卷的绝作呢？原来，这首诗里，有一句最美最耐人寻味的诗句，即开头第一句：“秦时明月汉时关”。这句诗有什么妙处呢？得从诗题说起。此诗题名《出塞》，一望而知是一首乐府诗。乐府诗是要谱成<a href="/chaxun/zuozhe/6812.html" target="_blank">乐章</a>、广泛传唱的，为入谱传唱的需要，诗中就往往有一些常见习用的词语。<a href="/chaxun/zuozhe/56.html" target="_blank">王昌龄</a>这首诗也不例外。你看这开头一句中的“明月”和“关”两个词，正是有关边塞的乐府诗里很常见的词语。?独指??<br/>横吹曲辞》里不是就有《关山月》吗？《乐府解题》说：“关山月，伤离别也。”无论征人思家，思妇怀远，往往都离不了这“关”和“月”两个字。“关山三五月，客子忆秦川”（<a href="/chaxun/zuozhe/376.html" target="_blank">徐陵</a>《关山月》），“关山夜月明，秋色照孤城”（<a href="/chaxun/zuozhe/364.html" target="_blank">王褒</a>《关山月》），“关山万里不可越，谁能坐对芳菲月”（<a href="/chaxun/zuozhe/389.html" target="_blank">卢思道</a>《从军行》），“<br/>陇头明月迥临关，陇上行人夜吹笛”（<a href="/chaxun/zuozhe/6.html" target="_blank">王维</a>《陇头吟》），例子举不胜举。看清这一点之后，你就明白这句诗的新鲜奇妙之处，就是在“明月”和“关”两个词之前增加了“秦”、“汉”两个时间性的限定词。<br/><br/>    这样从千年以前、万里之外下笔，自然形成了一种雄浑苍茫的独特的意境，借用前代评诗惯用的词语来说，就是“发兴高远”，使读者把眼前明月下的边关同秦代筑关备胡，汉代在关内外与胡人发生一系列战争的悠久历史自然联系起来。这样一来，“万里长征人未还”，就不只是当代的人们，而是自秦汉以来世世代代的人们共同的悲剧；希望边境有“不教胡马度阴山”的“龙城飞将”，也不只是汉代的人们，而是世世代代人们共同的愿望。平凡的悲剧，平凡的希望，都随着首句“秦”、“汉”这两个时间限定词的出现而显示出很不平凡的意义。这句诗声调高昂，气势雄浑，也足以统摄全篇。诗歌之美，诗歌语言之美，往往就表现在似乎很平凡的字上，或者说，就表现在把似乎很平凡的字用在最确切最关键的地方。而这些地方，往往又最能体现诗人高超的艺术造诣。 <br/><br/>（廖仲安）<br/><br/>----引自"国学网站"http://www.guoxue.com            </div>
+        </div>
+                <div id="pre_next_div">
+            <div id="pre_item">
+                                    <a href="/chaxun/list/187662.html">
+                        <div class="pre_text_text">上一首</div>
+                        <div>《出塞》</div>
+                    </a>
+                            </div>
+            <div id="next_item">
+                                <a href="/chaxun/list/187662.html">
+                    <div class="pre_text_text">下一首</div>
+                    <div>《出塞》</div>
+                </a>
+                            </div>
+            <div style="clear: both"></div>
+        </div>
+                <div class="card">
+            <div class="item_title">相关诗词</div>
+                        <div class="shici_card">
+                <div class="list_num_info">
+                    1                    <br/>
+                    [南北朝]
+                    <br/>
+                    徐陵                </div>
+                <div class="shici_list_main">
+                    <h3><a href="/chaxun/list/20076.html">《关山月》</a> </h3>
+                    <div class="shici_content">
+                        关山三五月，客子忆秦川。<br />思妇高楼上，当窗应未眠。<br />                                                <a href="javascript:void(0)" class="show_more_shici">展开全文</a>
+                        <div style="display: none">
+                            星旗映疏勒，云阵上祁连。<br />战气今如此，从军复几年。<br />                        </div>
+                        <a href="javascript:void(0)" class="hide_more_shici">收起</a>
+                                            </div>
+                </div>
+                                <div style="clear: both"></div>
+            </div>
+            <div style="background: #eee;height: 1px;margin: 10px 0;"></div>
+                        <div class="shici_card">
+                <div class="list_num_info">
+                    2                    <br/>
+                    [唐]
+                    <br/>
+                    王维                </div>
+                <div class="shici_list_main">
+                    <h3><a href="/chaxun/list/53191.html">《横吹曲辞 陇头吟》</a> </h3>
+                    <div class="shici_content">
+                        长安少年游侠客，夜上戍楼看太白。<br />陇头明月迥临关，陇上行人夜吹笛。<br />                                                <a href="javascript:void(0)" class="show_more_shici">展开全文</a>
+                        <div style="display: none">
+                            关西老将不胜愁，驻马听之双泪流。<br />身经大小百余战，麾下偏裨万户侯。<br />苏武才为典属国，节旄落尽海西头。<br />                        </div>
+                        <a href="javascript:void(0)" class="hide_more_shici">收起</a>
+                                            </div>
+                </div>
+                                <div style="clear: both"></div>
+            </div>
+            <div style="background: #eee;height: 1px;margin: 10px 0;"></div>
+                    </div>
+            </div>
+    <div  id="main_right">
+        
+                <div class="card zz_other_shici">
+            <div class="aside_title">
+                王昌龄的其他作品
+            </div>
+            <ul>
+                                    <li><a href="/chaxun/list/187662.html">《出塞》</a> </li>
+                                    <li><a href="/chaxun/list/5115.html">《从军行》</a> </li>
+                                    <li><a href="/chaxun/list/3222.html">《从军行》</a> </li>
+                                    <li><a href="/chaxun/list/57648.html">《从军行》</a> </li>
+                                    <li><a href="/chaxun/list/4261.html">《芙蓉楼送辛渐》</a> </li>
+                                    <li><a href="/chaxun/list/29436.html">《闺怨》</a> </li>
+                                    <li><a href="/chaxun/list/187667.html">《闺怨》</a> </li>
+                                    <li><a href="/chaxun/list/29421.html">《采莲曲》</a> </li>
+                                    <li><a href="/chaxun/list/3075178.html">《塞下曲·饮马渡秋水》</a> </li>
+                                    <li><a href="/chaxun/list/56483.html">《长歌行》</a> </li>
+                                    <li><a href="/chaxun/list/57963.html">《送柴侍御》</a> </li>
+                                    <li><a href="/chaxun/list/29467.html">《送柴侍御》</a> </li>
+                                    <li><a href="/chaxun/list/29472.html">《同从弟南斋玩月忆山阴崔少府》</a> </li>
+                                    <li><a href="/chaxun/list/58053.html">《送别》</a> </li>
+                                    <li><a href="/chaxun/list/57864.html">《送魏二》</a> </li>
+                                    <li><a href="/chaxun/list/56426.html">《塞上曲》</a> </li>
+                            </ul>
+        </div>
+                
+    </div>
+    <div style="clear: both;"></div>
+</div><a href="javascript:toTop();"><div id="toTop">顶部</div></a>
+<div id="footer">
+    <div id="footer_main">
+        <div id="bottom_nav">
+            <a href="/category/story">诗人故事</a>
+            <a href="/category/xiehouyu">歇后语</a>
+            <a href="/category/miyu">谜语</a>
+            <a href="/category/duilian">对联</a>
+                        Copyright © 2010-2020 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">晋ICP备2020008765号-1</a> 邮箱：
+                    </div>
+    </div>
+</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?649f268280b553df1f778477ee743752";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>

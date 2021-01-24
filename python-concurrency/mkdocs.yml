@@ -1,0 +1,15 @@
+site_name: python并发编程
+pages:
+- python并发编程介绍: index.md
+- 多进程模块multiprocessing: multiprocessing.md
+- 多进程创建: process.md
+- 进程之间通信: queue_message.md
+- 进程之间同步: sync_process.md
+- 进程池Pool: pool.md
+- 多线程模块threading: threading_introduce.md
+- threading实例及方法: threading_create.md
+- 多线程同步与通信1: threading_sync_class.md
+- 多线程同步与通信2: threading_sync_class_2.md
+- 多线程与队列Queue: threading_sync_queue.md
+- 多线程的线程池: threading_pool.md
+theme: readthedocs
